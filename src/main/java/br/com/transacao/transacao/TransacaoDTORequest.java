@@ -1,7 +1,9 @@
 package br.com.transacao.transacao;
 
 import br.com.transacao.cartao.Cartao;
+import br.com.transacao.cartao.CartaoDTORequest;
 import br.com.transacao.estabelecimento.Estabelecimento;
+import br.com.transacao.estabelecimento.EstabelecimentoDTORequest;
 
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -19,26 +21,28 @@ public class TransacaoDTORequest {
     private BigDecimal valor;
 
     @NotNull
-    private Estabelecimento estabelecimento;
+    private EstabelecimentoDTORequest estabelecimentoDTORequest;
 
     @NotNull
-    private Cartao cartao;
+    private CartaoDTORequest cartaoDTORequest;
 
     @NotBlank
     private LocalDateTime efetivadaEm;
 
     public Transacao converter(){
-        return new Transacao(this.id,this.valor, this.estabelecimento, this.cartao, this.efetivadaEm);
+        Estabelecimento estabelecimento = this.estabelecimentoDTORequest.converter();
+        Cartao cartao = this.cartaoDTORequest.converter();
+        return new Transacao(this.id,this.valor, estabelecimento, cartao, this.efetivadaEm);
     }
 
     public TransacaoDTORequest() {
     }
 
-    public TransacaoDTORequest(String id, BigDecimal valor, Estabelecimento estabelecimento, Cartao cartao, LocalDateTime efetivadaEm) {
+    public TransacaoDTORequest(String id, BigDecimal valor, EstabelecimentoDTORequest estabelecimentoDTORequest, CartaoDTORequest cartaoDTORequest, LocalDateTime efetivadaEm) {
         this.id = id;
         this.valor = valor;
-        this.estabelecimento = estabelecimento;
-        this.cartao = cartao;
+        this.estabelecimentoDTORequest = estabelecimentoDTORequest;
+        this.cartaoDTORequest = cartaoDTORequest;
         this.efetivadaEm = efetivadaEm;
     }
 
@@ -50,12 +54,12 @@ public class TransacaoDTORequest {
         return valor;
     }
 
-    public Estabelecimento getEstabelecimento() {
-        return estabelecimento;
+    public EstabelecimentoDTORequest getEstabelecimentoDTORequest() {
+        return estabelecimentoDTORequest;
     }
 
-    public Cartao getCartao() {
-        return cartao;
+    public CartaoDTORequest getCartaoDTORequest() {
+        return cartaoDTORequest;
     }
 
     public LocalDateTime getEfetivadaEm() {

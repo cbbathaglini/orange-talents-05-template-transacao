@@ -39,4 +39,13 @@ public class EstabelecimentoDTORequest {
     public String getEndereco() {
         return endereco;
     }
+
+    @Override
+    public String toString() {
+        return "EstabelecimentoDTORequest{" +
+                "nome='" + nome + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", endereco='" + endereco + '\'' +
+                '}';
+    }
 }

@@ -24,4 +24,20 @@ public class Estabelecimento {
         this.cidade = cidade;
         this.endereco = endereco;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
 }

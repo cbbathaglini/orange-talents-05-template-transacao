@@ -1,5 +1,6 @@
 package br.com.transacao;
 
+import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -37,6 +38,13 @@ public class KafkaConfiguration {
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, kafkaProperties.getConsumer().getGroupId());
         properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, kafkaProperties.getConsumer().getAutoOffsetReset());
 
+        /*  Error Handling */
+//        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
+//        properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
+//        properties.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
+//        properties.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class.getName());
+
+
         return properties;
     }
 
@@ -46,7 +54,6 @@ public class KafkaConfiguration {
      *  1.1) Definição de qual será o desserializador da chave e do evento/mensagem. Ex: StringDeserializer,JsonDeserializer
      *  1.2) Quais são as configurações desse consumidor
      */
-
     @Bean
     public ConsumerFactory<String, EventoDeTransacao> transactionConsumerFactory() {
         StringDeserializer stringDeserializer = new StringDeserializer(); // 1.1
@@ -64,7 +71,6 @@ public class KafkaConfiguration {
     public ConcurrentKafkaListenerContainerFactory<String, EventoDeTransacao> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, EventoDeTransacao> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(transactionConsumerFactory());
-
         return factory;
     }
 

@@ -2,6 +2,7 @@ package br.com.transacao.transacao;
 
 import br.com.transacao.cartao.Cartao;
 import br.com.transacao.estabelecimento.Estabelecimento;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -16,10 +17,10 @@ public class Transacao {
 
     private BigDecimal valor;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Estabelecimento estabelecimento;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Cartao cartao;
 
     private LocalDateTime efetivadaEm;
@@ -33,6 +34,26 @@ public class Transacao {
         this.estabelecimento = estabelecimento;
         this.cartao = cartao;
         this.efetivadaEm = efetivadaEm;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public Estabelecimento getEstabelecimento() {
+        return estabelecimento;
+    }
+
+    public Cartao getCartao() {
+        return cartao;
+    }
+
+    public LocalDateTime getEfetivadaEm() {
+        return efetivadaEm;
     }
 }
 /*

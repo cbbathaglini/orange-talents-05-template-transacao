@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 public class CartaoDTORequest {
     @NotBlank
     private String id;
-
     @NotBlank
     private String email;
 
@@ -29,5 +28,13 @@ public class CartaoDTORequest {
 
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public String toString() {
+        return "CartaoDTORequest{" +
+                "id='" + id + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
