@@ -40,4 +40,8 @@ public class Estabelecimento {
     public String getEndereco() {
         return endereco;
     }
+
+    public EstabelecimentoDTOResponse converter() {
+        return new EstabelecimentoDTOResponse(this.nome, this.cidade, this.endereco);
+    }
 }

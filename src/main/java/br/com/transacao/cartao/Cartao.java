@@ -13,6 +13,7 @@ public class Cartao {
     public Cartao() {
     }
 
+
     public Cartao(String id, String email) {
         this.id = id;
         this.email = email;
@@ -24,5 +25,9 @@ public class Cartao {
 
     public String getEmail() {
         return email;
+    }
+
+    public CartaoDTOResponse converter() {
+        return new CartaoDTOResponse(this.id,this.email);
     }
 }
